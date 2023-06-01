@@ -1,4 +1,9 @@
 package com.api.adoptme.repository;
 
-public interface AnimalRepository {
+import com.api.adoptme.model.Animal;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AnimalRepository  extends JpaRepository<Animal, Long> {
 }
