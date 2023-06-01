@@ -1,0 +1,1 @@
+Feature: Adopt Me Rest API functionalities
