@@ -28,12 +28,14 @@ public class Adoption {
     public Adoption() {
     }
 
-    public Adoption(Long id, String location, String number, String email, String name) {
+
+    public Adoption(Long id, String location, String number, String email, String name, List<Animal> animals) {
         this.id = id;
         this.location = location;
         this.number = number;
         this.email = email;
         this.name = name;
+        this.animals = animals;
     }
 
     public Long getId() {
@@ -76,6 +78,14 @@ public class Adoption {
         this.name = name;
     }
 
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
+    }
+
     @Override
     public String toString() {
         return "Adoption{" +
@@ -84,6 +94,7 @@ public class Adoption {
                 ", number='" + number + '\'' +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
+                ", animals=" + animals +
                 '}';
     }
 }
