@@ -1,6 +1,7 @@
 package com.api.adoptme.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "adoption_agency")
@@ -22,6 +23,8 @@ public class Adoption {
     @Column
     private String name;
 
+    @OneToMany(mappedBy = "adoption")
+    private List<Animal> animals;
     public Adoption() {
     }
 

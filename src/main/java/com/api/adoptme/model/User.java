@@ -4,6 +4,7 @@ package com.api.adoptme.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -21,15 +22,19 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<UserAnimal> userAnimals;
 
     public User() {
     }
 
-    public User(Long id, String email, String password) {
+    public User(Long id, String email, String password, List<UserAnimal> userAnimals) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.userAnimals = userAnimals;
     }
+
 
     public Long getId() {
         return id;
@@ -55,12 +60,21 @@ public class User {
         this.password = password;
     }
 
+    public List<UserAnimal> getUserAnimals() {
+        return userAnimals;
+    }
+
+    public void setUserAnimals(List<UserAnimal> userAnimals) {
+        this.userAnimals = userAnimals;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", userAnimals=" + userAnimals +
                 '}';
     }
 }

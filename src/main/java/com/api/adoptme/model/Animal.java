@@ -1,6 +1,7 @@
 package com.api.adoptme.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "animals")
@@ -28,6 +29,12 @@ public class Animal {
     @Column
     private String species;
 
+    @OneToMany(mappedBy = "animal")
+    private List<UserAnimal> userAnimals;
+
+    @ManyToOne
+    @JoinColumn(name = "adoption_id")
+    private Adoption adoption;
     public Animal() {
     }
 
