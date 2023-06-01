@@ -38,7 +38,8 @@ public class Animal {
     public Animal() {
     }
 
-    public Animal(Long id, String name, String gender, String color, String age, String breed, String species) {
+
+    public Animal(Long id, String name, String gender, String color, String age, String breed, String species, List<UserAnimal> userAnimals, Adoption adoption) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -46,6 +47,8 @@ public class Animal {
         this.age = age;
         this.breed = breed;
         this.species = species;
+        this.userAnimals = userAnimals;
+        this.adoption = adoption;
     }
 
     public Long getId() {
@@ -104,6 +107,22 @@ public class Animal {
         this.species = species;
     }
 
+    public List<UserAnimal> getUserAnimals() {
+        return userAnimals;
+    }
+
+    public void setUserAnimals(List<UserAnimal> userAnimals) {
+        this.userAnimals = userAnimals;
+    }
+
+    public Adoption getAdoption() {
+        return adoption;
+    }
+
+    public void setAdoption(Adoption adoption) {
+        this.adoption = adoption;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +
@@ -114,6 +133,8 @@ public class Animal {
                 ", age='" + age + '\'' +
                 ", breed='" + breed + '\'' +
                 ", species='" + species + '\'' +
+                ", userAnimals=" + userAnimals +
+                ", adoption=" + adoption +
                 '}';
     }
 }
