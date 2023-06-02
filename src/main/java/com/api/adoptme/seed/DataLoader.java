@@ -1,5 +1,6 @@
 package com.api.adoptme.seed;
 
+import com.api.adoptme.exception.InformationNotFoundException;
 import com.api.adoptme.model.User;
 import com.api.adoptme.repository.AnimalRepository;
 import com.api.adoptme.repository.UserAnimalRepository;
@@ -8,6 +9,8 @@ import com.api.adoptme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -36,6 +39,14 @@ public class DataLoader implements CommandLineRunner {
         LoadUserAnimalData();
     }
 
+    private User getUser(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new InformationNotFoundException("Not Found!");
+        }
+    }
 
     private void LoadUserAnimalData() {
     }
