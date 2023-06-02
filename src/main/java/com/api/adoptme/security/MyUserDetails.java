@@ -6,12 +6,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 
 public class MyUserDetails implements UserDetails {
 
     private final User user;
 
-    public MyUserDetails(User user) {
+    public MyUserDetails(Optional<User> user) {
         this.user = user;
     }
 
