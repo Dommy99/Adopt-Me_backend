@@ -3,8 +3,11 @@ package com.api.adoptme.controller;
 import com.api.adoptme.exception.InformationExistException;
 import com.api.adoptme.exception.InformationNotFoundException;
 import com.api.adoptme.model.User;
+import com.api.adoptme.model.login.LoginRequest;
+import com.api.adoptme.model.login.LoginResponse;
 import com.api.adoptme.repository.UserRepository;
 import com.api.adoptme.service.UserService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,5 +69,18 @@ public class UserController {
         }
     }
 
-
+    @PostMapping(path = "/users/login")
+    // http://localhost:{portNumber}/auth/users/login
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        response = new HashMap<>();
+        try {
+            LoginResponse loginResponse = userService.loginUser(loginRequest);
+            response.put("message", "user logged in");
+            response.put("data",loginResponse.getMessage());
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        }catch (RuntimeException e){
+            response.put("message",e.getMessage());
+            return new ResponseEntity<>(response,HttpStatus.I_AM_A_TEAPOT);
+        }
+    }
 }
