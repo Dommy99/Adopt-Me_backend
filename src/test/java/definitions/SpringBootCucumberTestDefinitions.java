@@ -49,7 +49,7 @@ public class SpringBootCucumberTestDefinitions {
         requestBody.put("email", "email@email.com");
         requestBody.put("password", "123");
         request.header("Content-Type", "application/json");
-        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/login");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/login/");
         Assert.assertEquals(401, response.getStatusCode());
     }
 
