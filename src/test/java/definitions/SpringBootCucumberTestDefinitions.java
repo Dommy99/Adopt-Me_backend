@@ -1,10 +1,25 @@
 package definitions;
 
+import com.api.adoptme.AdoptMeApplication;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.CucumberContextConfiguration;
+import io.restassured.response.Response;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
+@CucumberContextConfiguration
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = AdoptMeApplication.class)
 public class SpringBootCucumberTestDefinitions {
+
+    private static final String BASE_URL = "http://localhost:";
+
+    @LocalServerPort
+    String port;
+
+    private static Response response;
+
     @Given("A email is not registered")
     public void aEmailIsNotRegistered() {
     }
