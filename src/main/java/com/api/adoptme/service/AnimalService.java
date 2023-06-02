@@ -17,6 +17,7 @@ public class AnimalService {
         this.animalRepository = animalRepository;
     }
 
+
     public List<Animal> getAllAnimals() {
         return animalRepository.findAll();
     };

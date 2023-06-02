@@ -32,25 +32,6 @@ public class UserController {
 
     /**
      *
-     * @return
-     */
-    @GetMapping(path = "/users")
-    // http://localhost:{portNumber}/auth/users
-    public ResponseEntity<?> getAllUsers(){
-        response = new HashMap<>();
-        List<User> users = userService.getAllUsers();
-        if (users != null) {
-            response.put("message","success");
-            response.put("data", users);
-            return new ResponseEntity<>(response, HttpStatus.FOUND);
-        } else {
-            response.put("message", "Insufficient rights");
-            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
-        }
-    }
-
-    /**
-     *
      * @param userObj
      * @return
      */
