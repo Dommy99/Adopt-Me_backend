@@ -3,6 +3,7 @@ package com.api.adoptme.seed;
 import com.api.adoptme.exception.InformationNotFoundException;
 import com.api.adoptme.model.Animal;
 import com.api.adoptme.model.User;
+import com.api.adoptme.model.UserAnimal;
 import com.api.adoptme.repository.AnimalRepository;
 import com.api.adoptme.repository.UserAnimalRepository;
 import com.api.adoptme.repository.UserRepository;
@@ -59,6 +60,23 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void LoadUserAnimalData() {
+        if (userAnimalRepository.count() == 0){
+            User user1 = getUser(1L);
+            User user2 = getUser(2L);
+            User user3 = getUser(3L);
+
+            Animal animal1 = getAnimal(1L);
+            Animal animal2 = getAnimal(2L);
+            Animal animal3 = getAnimal(3L);
+
+            UserAnimal userAnimal1 = new UserAnimal(user1,animal1);
+            UserAnimal userAnimal2 = new UserAnimal(user2,animal2);
+            UserAnimal userAnimal3 = new UserAnimal(user3,animal3);
+
+            userAnimalRepository.save(userAnimal1);
+            userAnimalRepository.save(userAnimal2);
+            userAnimalRepository.save(userAnimal3);
+        }
     }
 
     private void loadAnimalData() {

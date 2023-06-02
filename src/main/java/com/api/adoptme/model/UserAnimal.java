@@ -21,12 +21,16 @@ public class UserAnimal {
     public UserAnimal() {
     }
 
-    public UserAnimal(Long id, User user, Animal animal) {
-        this.id = id;
+//    public UserAnimal(Long id, User user, Animal animal) {
+//        this.id = id;
+//        this.user = user;
+//        this.animal = animal;
+//    }
+
+    public UserAnimal( User user, Animal animal) {
         this.user = user;
         this.animal = animal;
     }
-
     public Long getId() {
         return id;
     }
