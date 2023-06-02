@@ -65,5 +65,13 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadUserData() {
+        if (userRepository.count() == 0) {
+            User user1 = new User("123@email.com","123");
+            User user2 = new User("1234@email.com","1234");
+            User user3 = new User("12345@email.com","12345");
+            userService.createUser(user1);
+            userService.createUser(user2);
+            userService.createUser(user3);
+        }
     }
 }

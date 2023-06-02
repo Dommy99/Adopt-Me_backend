@@ -28,12 +28,16 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String email, String password, List<UserAnimal> userAnimals) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.userAnimals = userAnimals;
-    }
+//    public User(Long id, String email, String password, List<UserAnimal> userAnimals) {
+//        this.id = id;
+//        this.email = email;
+//        this.password = password;
+//        this.userAnimals = userAnimals;
+//    }
+public User( String email, String password) {
+    this.email = email;
+    this.password = password;
+}
 
 
     public Long getId() {
