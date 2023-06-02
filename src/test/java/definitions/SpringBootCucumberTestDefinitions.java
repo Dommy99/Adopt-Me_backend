@@ -44,7 +44,13 @@ public class SpringBootCucumberTestDefinitions {
     // Unregistered User
     // Scenario: An unregistered user is able to register
     @Given("A email is not registered")
-    public void aEmailIsNotRegistered() {
+    public void aEmailIsNotRegistered() throws JSONException {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("email@email.com","User1");
+        requestBody.put("password","123");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/login");
+        Assert.assertEquals(418, response.getStatusCode());
     }
 
     @When("A user registers with unique email and a password")

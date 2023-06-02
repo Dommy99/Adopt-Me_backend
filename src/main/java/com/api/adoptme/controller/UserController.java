@@ -1,7 +1,9 @@
 package com.api.adoptme.controller;
 
 import com.api.adoptme.exception.InformationExistException;
+import com.api.adoptme.exception.InformationNotFoundException;
 import com.api.adoptme.model.User;
+import com.api.adoptme.repository.UserRepository;
 import com.api.adoptme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/auth")
@@ -24,6 +27,10 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping(path = "/users")
     // http://localhost:{portNumber}/auth/users
     public ResponseEntity<?> getAllUsers(){
@@ -58,4 +65,6 @@ public class UserController {
             return new ResponseEntity<>(response,HttpStatus.CONFLICT);
         }
     }
+
+
 }
