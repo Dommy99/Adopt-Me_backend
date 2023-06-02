@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -30,10 +31,15 @@ public class SpringBootCucumberTestDefinitions {
 
     private static final String BASE_URL = "http://localhost:";
 
+    private static final RequestSpecification request = RestAssured.given();
+
+    private static Response response;
     @LocalServerPort
     String port;
 
-    private static Response response;
+//    public SpringBootTestDefinitions() {
+//        RestAssured.baseURI = BASE_URL;
+//    }
 
     // Unregistered User
     // Scenario: An unregistered user is able to register
@@ -71,14 +77,11 @@ public class SpringBootCucumberTestDefinitions {
     // Scenario: Any user is able to view  all animals
     @Given("A list of animals are available")
     public void aListOfAnimalsAreAvailable() {
-        try {
-            ResponseEntity<String> response = new RestTemplate().exchange(BASE_URL + port + "/api/animal", HttpMethod.GET, null, String.class);
-            List<Map<String, String>> animals = JsonPath.from(String.valueOf(response.getBody())).get("data");
-            Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
-            Assert.assertTrue(animals.size()>0);
-        }catch (HttpClientErrorException e) {
-            e.printStackTrace();
-        }
+        response = request.get(BASE_URL + port + "/api/animal");
+        String message = response.jsonPath().getString("message");
+        List<Map<String, String>> animal = response.jsonPath().get("data");
+        Assert.assertEquals("success", message);
+        Assert.assertTrue(animal.size() > 0);
 
     }
 
