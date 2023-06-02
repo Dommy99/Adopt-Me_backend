@@ -46,12 +46,13 @@ public class SpringBootCucumberTestDefinitions {
     @Given("A email is not registered")
     public void aEmailIsNotRegistered() throws JSONException {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("email@email.com","User1");
-        requestBody.put("password","123");
+        requestBody.put("email", "email@email.com");
+        requestBody.put("password", "123");
         request.header("Content-Type", "application/json");
         response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/login");
-        Assert.assertEquals(418, response.getStatusCode());
+        Assert.assertEquals(401, response.getStatusCode());
     }
+
 
     @When("A user registers with unique email and a password")
     public void aUserRegistersWithUniqueEmailAndAPassword() {

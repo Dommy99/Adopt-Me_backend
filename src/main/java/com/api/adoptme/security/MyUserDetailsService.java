@@ -30,4 +30,5 @@ public class MyUserDetailsService implements UserDetailsService {
         User user = userService.findUserByEmail(email);
         return new MyUserDetails(user);
     }
+
 }

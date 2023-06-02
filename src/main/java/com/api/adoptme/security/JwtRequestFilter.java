@@ -5,7 +5,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,7 +19,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     Logger logger = Logger.getLogger(JwtRequestFilter.class.getName());
 
     @Autowired
-    private MyUserDetailsService myAuthorDetailsService;
+    private MyUserDetailsService myUserDetailsService;
     @Autowired
     private JWTUtils jwtUtils;
     /**
@@ -58,7 +57,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // if valid get user email from the key
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
                 // load user details from the key
-                UserDetails userDetails = this.myAuthorDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = this.myUserDetailsService.loadUserByUsername(username);
                 // set username and password authentication token from user user details
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
