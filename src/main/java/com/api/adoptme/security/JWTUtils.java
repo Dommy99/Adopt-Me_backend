@@ -9,8 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class JwtUtils {
-    Logger logger = Logger.getLogger(JwtUtils.class.getName());
+public class JWTUtils {
+    Logger logger = Logger.getLogger(JWTUtils.class.getName());
 
     @Value("${jwt-secret}")
     private String jwtSecret;
