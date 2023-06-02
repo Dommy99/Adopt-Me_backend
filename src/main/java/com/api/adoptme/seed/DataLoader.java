@@ -1,6 +1,7 @@
 package com.api.adoptme.seed;
 
 import com.api.adoptme.exception.InformationNotFoundException;
+import com.api.adoptme.model.Animal;
 import com.api.adoptme.model.User;
 import com.api.adoptme.repository.AnimalRepository;
 import com.api.adoptme.repository.UserAnimalRepository;
@@ -43,6 +44,15 @@ public class DataLoader implements CommandLineRunner {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
+        } else {
+            throw new InformationNotFoundException("Not Found!");
+        }
+    }
+
+    private Animal getAnimal(Long id) {
+        Optional<Animal> animal = animalRepository.findById(id);
+        if (animal.isPresent()) {
+            return animal.get();
         } else {
             throw new InformationNotFoundException("Not Found!");
         }
