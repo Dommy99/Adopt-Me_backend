@@ -10,6 +10,8 @@ import com.api.adoptme.security.JWTUtils;
 import com.api.adoptme.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -58,17 +60,22 @@ public class UserService {
         throw new InformationNotFoundException("User with email "+ email+ " was not found.");
     }
 
-    public LoginResponse loginUser(LoginRequest loginRequest){
+    public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
         try {
+            // Authenticate the user with the provided email and password
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            // Set the authenticated user in the security context
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Get the authenticated user details
             myUserDetails = (MyUserDetails) authentication.getPrincipal();
-            final String jwtToken = jwtUtils.generateJwtToken(myUserDetails);
-            return new LoginResponse(jwtToken);
-        }catch (Exception e)
-        {
-            throw new RuntimeException("Username or Password is incorrect.");
+
+            // Generate a JWT token for the authenticated user
+            final String JWT = jwtUtils.generateJwtToken(myUserDetails);
+            // Return the generated JWT token in the response
+            return ResponseEntity.ok(new LoginResponse(JWT));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse("Error: username or password is incorrect"));
         }
     }
 }
