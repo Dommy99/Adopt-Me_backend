@@ -62,6 +62,14 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadAnimalData() {
+        if (animalRepository.count() == 0) {
+            Animal animal1 = new Animal("Tim","male","brown","2","boxer","dog");
+            Animal animal2 = new Animal("Timmy","male","black","3","pitbull","dog");
+            Animal animal3 = new Animal("Tims","female","orange","4","siamese","cat");
+            animalRepository.save(animal1);
+            animalRepository.save(animal2);
+            animalRepository.save(animal3);
+        }
     }
 
     private void loadUserData() {

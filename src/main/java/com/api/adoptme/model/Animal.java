@@ -39,16 +39,25 @@ public class Animal {
     }
 
 
-    public Animal(Long id, String name, String gender, String color, String age, String breed, String species, List<UserAnimal> userAnimals, Adoption adoption) {
-        this.id = id;
+//    public Animal(Long id, String name, String gender, String color, String age, String breed, String species, List<UserAnimal> userAnimals, Adoption adoption) {
+//        this.id = id;
+//        this.name = name;
+//        this.gender = gender;
+//        this.color = color;
+//        this.age = age;
+//        this.breed = breed;
+//        this.species = species;
+//        this.userAnimals = userAnimals;
+//        this.adoption = adoption;
+//    }
+
+    public Animal( String name, String gender, String color, String age, String breed, String species) {
         this.name = name;
         this.gender = gender;
         this.color = color;
         this.age = age;
         this.breed = breed;
         this.species = species;
-        this.userAnimals = userAnimals;
-        this.adoption = adoption;
     }
 
     public Long getId() {
