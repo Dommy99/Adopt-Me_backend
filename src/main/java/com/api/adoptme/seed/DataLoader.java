@@ -1,5 +1,6 @@
 package com.api.adoptme.seed;
 
+import com.api.adoptme.model.User;
 import com.api.adoptme.repository.AnimalRepository;
 import com.api.adoptme.repository.UserAnimalRepository;
 import com.api.adoptme.repository.UserRepository;
@@ -34,6 +35,7 @@ public class DataLoader implements CommandLineRunner {
         loadAnimalData();
         LoadUserAnimalData();
     }
+
 
     private void LoadUserAnimalData() {
     }
