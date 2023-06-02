@@ -5,6 +5,7 @@ import com.api.adoptme.model.User;
 import com.api.adoptme.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,5 +24,9 @@ public class UserService {
             return userRepository.save(userObject);
         }
         throw new InformationExistException("User with email " + userObject.getEmail() + " already exists.");
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
