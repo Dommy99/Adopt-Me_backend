@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
-import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/auth")
@@ -31,12 +31,6 @@ public class UserController {
      * @param userObj
      * @return
      */
-//    @PostMapping(path = "/users/register/")
-//    // http://localhost:{portNumber}/auth/users/register/
-//    public User createUser(@RequestBody User userObj){
-//        return userService.createUser(userObj);
-//    }
-
     @PostMapping(path = "/users/register/")
     // http://localhost:{portNumber}/auth/users/register/
     public ResponseEntity<?> createUser(@RequestBody User userObj){
@@ -57,12 +51,6 @@ public class UserController {
      * @param loginRequest
      * @return
      */
-//    @PostMapping(path = "/users/login/")
-//    // http://localhost:{portNumber}/auth/users/login/
-//    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
-//        return userService.loginUser(loginRequest);
-//    }
-
     @PostMapping(path = "/users/login/")
     // http://localhost:{portNumber}/auth/users/login/
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {

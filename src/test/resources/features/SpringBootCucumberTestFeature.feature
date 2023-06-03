@@ -7,11 +7,6 @@ Feature: Adopt Me Rest API functionalities
     When A user registers with unique email and a password
     Then A new user account is created and returned
 
-  # All user login user stories
-#  Scenario: A user is able to log in
-#    Given A list of registered users
-#    When A registered user enters email and password
-#    Then The user is logged into the account and provided a token
 
 #  Scenario: Any user is able to view  all animals
 #    Given A list of animals are available

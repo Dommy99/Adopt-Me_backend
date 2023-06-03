@@ -40,7 +40,7 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder,
-                       @Lazy AuthenticationManager authenticationManager,JWTUtils jwtUtils, @Lazy MyUserDetails myUserDetails) {
+                       @Lazy AuthenticationManager authenticationManager, JWTUtils jwtUtils, @Lazy MyUserDetails myUserDetails) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
@@ -48,8 +48,11 @@ public class UserService {
         this.myUserDetails = myUserDetails;
     }
 
-
-
+    /**
+     *
+     * @param userObject
+     * @return
+     */
     public User createUser(User userObject) {
         Optional<User> user = userRepository.findUserByEmail(userObject.getEmail());
         if (user.isEmpty()) {
@@ -59,46 +62,36 @@ public class UserService {
         throw new InformationExistException("User with email " + userObject.getEmail() + " already exists.");
     }
 
-    public User findUserByEmail(String email){
+    /**
+     *
+     * @param email
+     * @return
+     */
+    public User findUserByEmail(String email) {
         Optional<User> user = userRepository.findUserByEmail(email);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             return user.get();
         }
-        throw new InformationNotFoundException("User with email "+ email+ " was not found.");
+        throw new InformationNotFoundException("User with email " + email + " was not found.");
     }
 
-//    public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
-//        try {
-//            // Authenticate the user with the provided email and password
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-//            // Set the authenticated user in the security context
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//            // Get the authenticated user details
-//            myUserDetails = (MyUserDetails) authentication.getPrincipal();
-//
-//            // Generate a JWT token for the authenticated user
-//            final String JWT = jwtUtils.generateJwtToken(myUserDetails);
-//            // Return the generated JWT token in the response
-//            return ResponseEntity.ok(new LoginResponse(JWT));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse("Error: email or password is incorrect"));
-//        }
-//    }
-
-public LoginResponse loginUser(LoginRequest loginRequest){
-    try {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        myUserDetails = (MyUserDetails) authentication.getPrincipal();
-        final String jwtToken = jwtUtils.generateJwtToken(myUserDetails);
-        return new LoginResponse(jwtToken);
-    }catch (Exception e)
-    {
-        throw new RuntimeException("Email or Password is incorrect.");
+    /**
+     *
+     * @param loginRequest
+     * @return
+     */
+    public LoginResponse loginUser(LoginRequest loginRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            myUserDetails = (MyUserDetails) authentication.getPrincipal();
+            final String jwtToken = jwtUtils.generateJwtToken(myUserDetails);
+            return new LoginResponse(jwtToken);
+        } catch (Exception e) {
+            throw new RuntimeException("Email or Password is incorrect.");
+        }
     }
-}
 
 
 }

@@ -34,6 +34,9 @@ public class SpringBootCucumberTestDefinitions {
     private static final RequestSpecification request = RestAssured.given();
 
     private static Response response;
+
+    private static String userToken;
+
     @LocalServerPort
     String port;
 
@@ -72,31 +75,14 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertEquals("test@email.com", user.get("email"));
     }
 
-    // Login user
-    // Scenario: A user is able to log in
-    @Given("A list of registered users")
-    public void aListOfRegisteredUsers() {
-        
-    }
-
-    @When("A registered user enters email and password")
-    public void aRegisteredUserEntersEmailAndPassword() {
-        
-    }
-
-    @Then("The user is logged into the account and provided a token")
-    public void theUserIsLoggedIntoTheAccountAndProvidedAToken() {
-        
-    }
-
     // Scenario: Any user is able to view  all animals
     @Given("A list of animals are available")
     public void aListOfAnimalsAreAvailable() {
-//        response = request.get(BASE_URL + port + "/api/animal");
-//        String message = response.jsonPath().getString("message");
-//        List<Map<String, String>> animal = response.jsonPath().get("data");
-//        Assert.assertEquals("success", message);
-//        Assert.assertTrue(animal.size() > 0);
+        response = request.get(BASE_URL + port + "/api/animal/");
+        String message = response.jsonPath().getString("message");
+        List<Map<String, String>> animal = response.jsonPath().get("data");
+        Assert.assertEquals("success", message);
+        Assert.assertTrue(animal.size() > 0);
 
     }
 
