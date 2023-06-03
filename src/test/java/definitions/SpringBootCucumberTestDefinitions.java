@@ -76,35 +76,44 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     // Scenario: Any user is able to view  all animals
-    @Given("A list of animals are available")
-    public void aListOfAnimalsAreAvailable() {
+//    @Given("A list of animals are available")
+//    public void aListOfAnimalsAreAvailable() {
 //        response = request.get(BASE_URL + port + "/api/animal/");
 //        String message = response.jsonPath().getString("message");
 //        List<Map<String, String>> animal = response.jsonPath().get("data");
 //        Assert.assertEquals("success", message);
 //        Assert.assertTrue(animal.size() > 0);
-
-    }
-
-    @When("A user searches for all animals")
-    public void aUserSearchesForAllAnimals() {
-        
-    }
-
-    @Then("A list of all animals is returned")
-    public void aListOfAllAnimalsIsReturned() {
-        
-    }
+//
+//    }
+//
+//    @When("A user searches for all animals")
+//    public void aUserSearchesForAllAnimals() {
+//
+//    }
+//
+//    @Then("A list of all animals is returned")
+//    public void aListOfAllAnimalsIsReturned() {
+//
+//    }
 
     // Scenario: Any logged-in user can add or remove an animal to their like list
     @Given("a list of animals exists")
     public void aListOfAnimalsExists() {
-
+        response = request.get(BASE_URL + port + "/api/animal/");
+        String message = response.jsonPath().getString("message");
+        List<Map<String, String>> animal = response.jsonPath().get("data");
+        Assert.assertEquals("success", message);
+        Assert.assertTrue(animal.size() > 0);
     }
 
     @When("user adds an animal to like list")
     public void userAddsAnAnimalToLikeList() {
-        
+        List<Map<String, String>> animals = response.jsonPath().get("data");
+        String animalId = animals.get(0).get("id");
+        String token = response.jsonPath().get("data");
+        //  "/api/user/{userId}/like/{animalId}"
+        response = request.given().header("Authorization", "Bearer " + token).post(BASE_URL + port + "/api/user/like/" + animalId);
+        userToken = token;
     }
 
     @Then("the animal is added to user like list")
