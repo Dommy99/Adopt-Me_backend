@@ -55,13 +55,21 @@ public class SpringBootCucumberTestDefinitions {
 
 
     @When("A user registers with unique email and a password")
-    public void aUserRegistersWithUniqueEmailAndAPassword() {
-        
+    public void aUserRegistersWithUniqueEmailAndAPassword() throws JSONException {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("email", "123@email.com");
+        requestBody.put("password", "123");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/register/");
     }
 
     @Then("A new user account is created and returned")
     public void aNewUserAccountIsCreatedAndReturned() {
-        
+        Assert.assertEquals(201, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Map<String, String> user = response.jsonPath().get("data");
+        Assert.assertEquals("user created", message);
+        Assert.assertEquals("JohnDoe", user.get("email"));
     }
 
     // Login user
