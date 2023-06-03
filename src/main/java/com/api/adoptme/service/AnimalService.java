@@ -27,11 +27,19 @@ public class AnimalService {
         return userDetails.getUser();
     }
 
-
+    /**
+     *
+     * @return
+     */
     public List<Animal> getAllAnimals() {
         return animalRepository.findAll();
     };
 
+    /**
+     *
+     * @param animalId
+     * @return
+     */
     public Animal getAnimalById(Long animalId) {
         Optional<Animal> animal = animalRepository.findById(animalId);
         if (animal.isEmpty()) {

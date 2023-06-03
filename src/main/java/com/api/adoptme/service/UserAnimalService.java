@@ -19,6 +19,11 @@ public class UserAnimalService {
         this.userAnimalRepository = userAnimalRepository;
     }
 
+    /**
+     *
+     * @param animalId
+     * @return
+     */
     public UserAnimal addAnimalToUserLikeList(Long animalId) {
         Animal animal = animalService.getAnimalById(animalId);
         UserAnimal userAnimal = userAnimalRepository.findByUserAndAnimal(AnimalService.getCurrentLoggedInUser(), animal);
@@ -28,11 +33,15 @@ public class UserAnimalService {
         userAnimal = new UserAnimal();
         userAnimal.setUser(AnimalService.getCurrentLoggedInUser());
         userAnimal.setAnimal(animal);
-//        return userAnimalRepository.save(userAnimal);
          userAnimalRepository.save(userAnimal);
         return userAnimal;
     }
 
+    /**
+     *
+     * @param animalId
+     * @return
+     */
     public UserAnimal deleteAnimeFromUserLikelist(Long animalId) {
         Animal animal = animalService.getAnimalById(animalId);
         UserAnimal userAnimal = userAnimalRepository.findByUserAndAnimal(AnimalService.getCurrentLoggedInUser(), animal);
@@ -40,7 +49,7 @@ public class UserAnimalService {
             userAnimalRepository.delete(userAnimal);
             return userAnimal;
         } else {
-            throw new InformationNotFoundException("Animal with id" + animalId + "isn't in your likelike");
+            throw new InformationNotFoundException("Animal with id " + animalId + "isn't in your likelist");
         }
     }
 }
