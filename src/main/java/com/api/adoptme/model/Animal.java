@@ -32,11 +32,11 @@ public class Animal {
     @Column
     private String species;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "animal")
     private List<UserAnimal> userAnimals;
 
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "adoption_id")
     private Adoption adoption;

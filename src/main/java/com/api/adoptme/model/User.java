@@ -1,6 +1,7 @@
 package com.api.adoptme.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,7 +23,7 @@ public class User {
     @Column
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "user")
     private List<UserAnimal> userAnimals;
 

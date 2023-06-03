@@ -13,12 +13,12 @@ public class UserAnimal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "animal_id")
     private Animal animal;
