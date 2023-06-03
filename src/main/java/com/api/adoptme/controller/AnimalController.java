@@ -22,7 +22,7 @@ public class AnimalController {
     @Autowired
     private AnimalService animalService;
 
-    @GetMapping(path = "/animal")
+    @GetMapping(path = "/animal/")
     public ResponseEntity<?> getAllAnimals(){
         message = new HashMap<>();
         List<Animal> animalList = animalService.getAllAnimals();

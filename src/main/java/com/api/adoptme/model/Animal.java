@@ -1,5 +1,7 @@
 package com.api.adoptme.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class Animal {
     @Column
     private String species;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "animal")
     private List<UserAnimal> userAnimals;
 
