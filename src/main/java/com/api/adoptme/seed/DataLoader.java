@@ -42,9 +42,9 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         loadUserData();
+        loadAdoptionData();
         loadAnimalData();
         loadUserAnimalData();
-        loadAdoptionData();
 
     }
 
@@ -62,6 +62,15 @@ public class DataLoader implements CommandLineRunner {
         Optional<Animal> animal = animalRepository.findById(id);
         if (animal.isPresent()) {
             return animal.get();
+        } else {
+            throw new InformationNotFoundException("Not Found!");
+        }
+    }
+
+    private Adoption getAdoption(Long id) {
+        Optional<Adoption> adoption = adoptionRepository.findById(id);
+        if (adoption.isPresent()) {
+            return adoption.get();
         } else {
             throw new InformationNotFoundException("Not Found!");
         }
@@ -89,20 +98,31 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadAnimalData() {
         if (animalRepository.count() == 0) {
-            Animal animal1 = new Animal("Tim","male","brown","2","boxer","dog");
-            Animal animal2 = new Animal("Timmy","male","black","3","pitbull","dog");
-            Animal animal3 = new Animal("Tims","female","orange","4","siamese","cat");
+            Adoption adoption1 = getAdoption(1L);
+            Adoption adoption2 = getAdoption(2L);
+            Adoption adoption3 = getAdoption(3L);
+
+            Animal animal1 = new Animal("Tim","male","brown","2","boxer","dog", adoption1);
+            Animal animal2 = new Animal("Timmy","male","black","3","pitbull","dog", adoption2);
+            Animal animal3 = new Animal("Tims","female","orange","4","siamese","cat", adoption3);
+
             animalRepository.save(animal1);
             animalRepository.save(animal2);
             animalRepository.save(animal3);
         }
     }
 
+
+
+
     private void loadAdoptionData() {
         if (adoptionRepository.count() == 0) {
             Adoption adoption1 = new Adoption("Austin", "211-111-1111","email1@email.com", "Adoption1");
             Adoption adoption2 = new Adoption("Dallas", "311-111-1111","email2@email.com", "Adoption2");
             Adoption adoption3 = new Adoption("Huston", "411-111-1111","email3@email.com", "Adoption3");
+            adoptionRepository.save(adoption1);
+            adoptionRepository.save(adoption2);
+            adoptionRepository.save(adoption3);
         }
     }
 

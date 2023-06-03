@@ -1,5 +1,6 @@
 package com.api.adoptme.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class Animal {
     @OneToMany(mappedBy = "animal")
     private List<UserAnimal> userAnimals;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "adoption_id")
     private Adoption adoption;
@@ -54,13 +56,14 @@ public class Animal {
 //        this.adoption = adoption;
 //    }
 
-    public Animal( String name, String gender, String color, String age, String breed, String species) {
+    public Animal( String name, String gender, String color, String age, String breed, String species, Adoption adoption) {
         this.name = name;
         this.gender = gender;
         this.color = color;
         this.age = age;
         this.breed = breed;
         this.species = species;
+        this.adoption = adoption;
     }
 
     public Long getId() {

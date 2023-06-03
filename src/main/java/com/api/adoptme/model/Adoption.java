@@ -1,5 +1,8 @@
 package com.api.adoptme.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class Adoption {
     @Column
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "adoption")
     private List<Animal> animals;
     public Adoption() {
