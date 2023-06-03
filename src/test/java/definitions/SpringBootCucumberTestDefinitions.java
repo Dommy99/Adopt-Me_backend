@@ -143,6 +143,24 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertTrue(userAnimal.get("animal").toString().contains("Tim"));
     }
 
+    @When("user removes an anime from their like list")
+    public void userRemovesAnAnimeFromTheirLikeList() throws Exception {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("data", new Animal("Tim","male","brown","2","boxer","dog", null) );
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", "Bearer " + getSecurityKey());
+        response = request.body(requestBody.toString()).delete(BASE_URL + port + "/api/like/2");
+    }
+
+    @Then("the animal is removed from the user like list")
+    public void theAnimalIsRemovedFromTheUserLikeList() {
+        Assert.assertEquals(200, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Map<String, Object> userAnimal = response.jsonPath().get("data");
+        Assert.assertEquals("delete success", message);
+        Assert.assertTrue(userAnimal.get("animal").toString().contains("Tim"));
+    }
+
     // Scenario: A liked animal should return adoption agency information
     @Given("a list of liked animals exists")
     public void aListOfLikedAnimalsExists() {
@@ -157,4 +175,5 @@ public class SpringBootCucumberTestDefinitions {
     @Then("that animals adoption information is shown")
     public void thatAnimalsAdoptionInformationIsShown() {
     }
+
 }

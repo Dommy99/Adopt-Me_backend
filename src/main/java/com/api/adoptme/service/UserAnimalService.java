@@ -1,6 +1,7 @@
 package com.api.adoptme.service;
 
 import com.api.adoptme.exception.InformationExistException;
+import com.api.adoptme.exception.InformationNotFoundException;
 import com.api.adoptme.model.Animal;
 import com.api.adoptme.model.UserAnimal;
 import com.api.adoptme.repository.UserAnimalRepository;
@@ -30,5 +31,16 @@ public class UserAnimalService {
 //        return userAnimalRepository.save(userAnimal);
          userAnimalRepository.save(userAnimal);
         return userAnimal;
+    }
+
+    public UserAnimal deleteAnimeFromUserLikelist(Long animalId) {
+        Animal animal = animalService.getAnimalById(animalId);
+        UserAnimal userAnimal = userAnimalRepository.findByUserAndAnimal(AnimalService.getCurrentLoggedInUser(), animal);
+        if (userAnimal != null) {
+            userAnimalRepository.delete(userAnimal);
+            return userAnimal;
+        } else {
+            throw new InformationNotFoundException("Animal with id" + animalId + "isn't in your likelike");
+        }
     }
 }

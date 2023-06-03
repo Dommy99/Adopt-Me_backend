@@ -17,6 +17,8 @@ Feature: Adopt Me Rest API functionalities
     Given a list of animals exists
     When user adds an animal to like list
     Then the animal is added to user like list
+    When user removes an anime from their like list
+    Then the animal is removed from the user like list
 
 #  Scenario: A liked animal should return adoption agency information
 #    Given a list of liked animals exists

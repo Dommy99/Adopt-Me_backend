@@ -20,6 +20,11 @@ public class UserAnimalController {
         this.userAnimalService = userAnimalService;
     }
 
+    /**
+     *
+     * @param animalId
+     * @return
+     */
     @PostMapping(path = "/like/{animalId}")
     public ResponseEntity<?> addAnimalToUserLikeList(@PathVariable Long animalId) {
 
@@ -29,4 +34,11 @@ public class UserAnimalController {
         message.put("message", "success");
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
+
+    /**
+     *
+     * @param animalId
+     * @return
+     */
+
 }
