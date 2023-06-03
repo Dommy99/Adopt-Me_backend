@@ -29,13 +29,20 @@ public class Adoption {
     }
 
 
-    public Adoption(Long id, String location, String number, String email, String name, List<Animal> animals) {
-        this.id = id;
+//    public Adoption(Long id, String location, String number, String email, String name, List<Animal> animals) {
+//        this.id = id;
+//        this.location = location;
+//        this.number = number;
+//        this.email = email;
+//        this.name = name;
+//        this.animals = animals;
+//    }
+
+    public Adoption( String location, String number, String email, String name) {
         this.location = location;
         this.number = number;
         this.email = email;
         this.name = name;
-        this.animals = animals;
     }
 
     public Long getId() {
