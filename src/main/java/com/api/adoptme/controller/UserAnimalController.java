@@ -40,5 +40,12 @@ public class UserAnimalController {
      * @param animalId
      * @return
      */
-
+    @DeleteMapping(path = "/like/{animalId}")
+    public ResponseEntity<?> deleteAnimeFromUserLikelist(@PathVariable Long animalId) {
+        message = new HashMap<>();
+        UserAnimal userAnimal = userAnimalService.deleteAnimeFromUserLikelist(animalId);
+        message.put("data", userAnimal);
+        message.put("message", "delete success");
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }
