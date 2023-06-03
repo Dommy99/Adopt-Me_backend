@@ -27,6 +27,8 @@ public class UserAnimalService {
         userAnimal = new UserAnimal();
         userAnimal.setUser(AnimalService.getCurrentLoggedInUser());
         userAnimal.setAnimal(animal);
-        return userAnimalRepository.save(userAnimal);
+//        return userAnimalRepository.save(userAnimal);
+         userAnimalRepository.save(userAnimal);
+        return userAnimal;
     }
 }

@@ -20,7 +20,7 @@ public class UserAnimalController {
         this.userAnimalService = userAnimalService;
     }
 
-    @PostMapping(path = "/user/{userId}/like/{animalId}")
+    @PostMapping(path = "/like/{animalId}")
     public ResponseEntity<?> addAnimalToUserLikeList(@PathVariable Long animalId) {
 
         message = new HashMap<>();
