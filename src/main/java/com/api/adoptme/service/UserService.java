@@ -93,5 +93,11 @@ public class UserService {
         }
     }
 
-
+    public User getUserById(Long userId) {
+        Optional<User> user = userRepository.findUserById(userId);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new InformationNotFoundException("User with id " + userId + " was not found.");
+    }
 }

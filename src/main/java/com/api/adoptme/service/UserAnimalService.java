@@ -3,21 +3,41 @@ package com.api.adoptme.service;
 import com.api.adoptme.exception.InformationExistException;
 import com.api.adoptme.exception.InformationNotFoundException;
 import com.api.adoptme.model.Animal;
+import com.api.adoptme.model.User;
 import com.api.adoptme.model.UserAnimal;
 import com.api.adoptme.repository.UserAnimalRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserAnimalService {
 
     private AnimalService animalService;
 
+    private UserService userService;
     private UserAnimalRepository userAnimalRepository;
 
-    public UserAnimalService(AnimalService animalService, UserAnimalRepository userAnimalRepository) {
+    public UserAnimalService(AnimalService animalService, UserService userService, UserAnimalRepository userAnimalRepository) {
         this.animalService = animalService;
+        this.userService = userService;
         this.userAnimalRepository = userAnimalRepository;
     }
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    public List<Animal> getLikedAnimalsByUser(Long userId) {
+        User user = userService.getUserById(userId);
+        List<UserAnimal> userAnimals = userAnimalRepository.findAllByUser(user);
+        return userAnimals.stream()
+                .map(UserAnimal::getAnimal)
+                .collect(Collectors.toList());
+    }
+
 
     /**
      *
