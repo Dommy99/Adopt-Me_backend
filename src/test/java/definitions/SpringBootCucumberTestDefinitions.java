@@ -89,6 +89,23 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertEquals("test@email.com", user.get("email"));
     }
 
+    @When("A user logs in")
+    public void aUserLogsIn() throws Exception {
+        RequestSpecification request = RestAssured.given();
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("email", "test@email.com");
+        requestBody.put("password", "123");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/users/login");
+        request.header("Authorization", "Bearer " + getSecurityKey());
+        Assert.assertEquals(200, response.getStatusCode());
+    }
+
+    @Then("A user should be able to log in")
+    public void aUserShouldBeAbleToLogIn() {
+        Assert.assertEquals(200, response.getStatusCode());
+    }
+
     // Scenario: Any user is able to view  all animals
     @Given("A list of animals are available")
     public void aListOfAnimalsAreAvailable() {
@@ -149,18 +166,4 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertTrue(userAnimal.get("animal").toString().contains("Tim"));
     }
 
-
-    @Given("A user registers")
-    public void aUserRegisters() {
-
-    }
-
-    @When("A user logs in")
-    public void aUserLogsIn() {
-
-    }
-
-    @Then("A user should be able to log in")
-    public void aUserShouldBeAbleToLogIn() {
-    }
 }

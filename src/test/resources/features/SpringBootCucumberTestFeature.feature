@@ -1,12 +1,13 @@
 Feature: Adopt Me Rest API functionalities
 
 
-    # Unregistered User user stories
+    # Unregistered User/
   Scenario: An unregistered user is able to register
     Given A email is not registered
     When A user registers with unique email and a password
     Then A new user account is created and returned
-
+    When A user logs in
+    Then A user should be able to log in
 
   Scenario: Any user is able to view  all animals
     Given A list of animals are available
@@ -19,7 +20,4 @@ Feature: Adopt Me Rest API functionalities
     When user removes an anime from their like list
     Then the animal is removed from the user like list
 
-  Scenario: A registered user is able to register
-    Given A user registers
-    When A user logs in
-    Then A user should be able to log in
+
