@@ -57,9 +57,6 @@ public class SpringBootCucumberTestDefinitions {
         return response.jsonPath().getString("data");
     }
 
-//    public SpringBootTestDefinitions() {
-//        RestAssured.baseURI = BASE_URL;
-//    }
 
     // Unregistered User
     // Scenario: An unregistered user is able to register
@@ -69,8 +66,8 @@ public class SpringBootCucumberTestDefinitions {
         requestBody.put("email", "email@email.com");
         requestBody.put("password", "123");
         request.header("Content-Type", "application/json");
-        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/login/");
-        Assert.assertEquals(401, response.getStatusCode());
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/register/");
+        Assert.assertEquals(201, response.getStatusCode());
     }
 
 
@@ -93,25 +90,16 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     // Scenario: Any user is able to view  all animals
-//    @Given("A list of animals are available")
-//    public void aListOfAnimalsAreAvailable() {
-//        response = request.get(BASE_URL + port + "/api/animal/");
-//        String message = response.jsonPath().getString("message");
-//        List<Map<String, String>> animal = response.jsonPath().get("data");
-//        Assert.assertEquals("success", message);
-//        Assert.assertTrue(animal.size() > 0);
-//
-//    }
-//
-//    @When("A user searches for all animals")
-//    public void aUserSearchesForAllAnimals() {
-//
-//    }
-//
-//    @Then("A list of all animals is returned")
-//    public void aListOfAllAnimalsIsReturned() {
-//
-//    }
+    @Given("A list of animals are available")
+    public void aListOfAnimalsAreAvailable() {
+        response = request.get(BASE_URL + port + "/api/animal/");
+        String message = response.jsonPath().getString("message");
+        List<Map<String, String>> animal = response.jsonPath().get("data");
+        Assert.assertEquals("success", message);
+        Assert.assertTrue(animal.size() > 0);
+
+    }
+
 
     // Scenario: Any logged-in user can add or remove an animal to their like list
     @Given("a list of animals exists")
@@ -126,7 +114,7 @@ public class SpringBootCucumberTestDefinitions {
     @When("user adds an animal to like list")
     public void userAddsAnAnimalToLikeList() throws Exception {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("data", new Animal("Tim","male","brown","2","boxer","dog", null) );
+        requestBody.put("data", new Animal("Tim","male","brown","2","boxer","dog","https://images.unsplash.com/photo-1592754862816-1a21a4ea2281?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGV0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60", null) );
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + getSecurityKey());
         response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/like/2");
@@ -146,7 +134,7 @@ public class SpringBootCucumberTestDefinitions {
     @When("user removes an anime from their like list")
     public void userRemovesAnAnimeFromTheirLikeList() throws Exception {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("data", new Animal("Tim","male","brown","2","boxer","dog", null) );
+        requestBody.put("data", new Animal("Tim","male","brown","2","boxer","dog","https://images.unsplash.com/photo-1592754862816-1a21a4ea2281?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGV0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60", null) );
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + getSecurityKey());
         response = request.body(requestBody.toString()).delete(BASE_URL + port + "/api/like/2");
@@ -161,19 +149,18 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertTrue(userAnimal.get("animal").toString().contains("Tim"));
     }
 
-    // Scenario: A liked animal should return adoption agency information
-    @Given("a list of liked animals exists")
-    public void aListOfLikedAnimalsExists() {
-        
+
+    @Given("A user registers")
+    public void aUserRegisters() {
+
     }
 
-    @When("the animal is added to the users liked list")
-    public void theAnimalIsAddedToTheUsersLikedList() {
-        
+    @When("A user logs in")
+    public void aUserLogsIn() {
+
     }
 
-    @Then("that animals adoption information is shown")
-    public void thatAnimalsAdoptionInformationIsShown() {
+    @Then("A user should be able to log in")
+    public void aUserShouldBeAbleToLogIn() {
     }
-
 }

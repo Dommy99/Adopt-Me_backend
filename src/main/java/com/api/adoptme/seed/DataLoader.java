@@ -102,9 +102,9 @@ public class DataLoader implements CommandLineRunner {
             Adoption adoption2 = getAdoption(2L);
             Adoption adoption3 = getAdoption(3L);
 
-            Animal animal1 = new Animal("Tim","male","brown","2","boxer","dog", adoption1);
-            Animal animal2 = new Animal("Timmy","male","black","3","pitbull","dog", adoption2);
-            Animal animal3 = new Animal("Tims","female","orange","4","siamese","cat", adoption3);
+            Animal animal1 = new Animal("Tim","male","brown","2","boxer","dog","https://images.unsplash.com/photo-1592754862816-1a21a4ea2281?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGV0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60", adoption1);
+            Animal animal2 = new Animal("Timmy","male","black","3","pitbull","dog","https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGV0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60", adoption2);
+            Animal animal3 = new Animal("Tims","female","orange","4","siamese","cat","https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBldHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60", adoption3);
 
             animalRepository.save(animal1);
             animalRepository.save(animal2);
