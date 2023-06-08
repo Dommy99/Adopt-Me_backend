@@ -1,13 +1,10 @@
 package com.api.adoptme.controller;
 
 import com.api.adoptme.model.Animal;
-import com.api.adoptme.model.User;
 import com.api.adoptme.model.UserAnimal;
-import com.api.adoptme.security.MyUserDetails;
 import com.api.adoptme.service.UserAnimalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,16 +17,17 @@ public class UserAnimalController {
 
     static HashMap<String, Object> message;
 
-    private UserAnimalService userAnimalService;
+    private final UserAnimalService userAnimalService;
 
     public UserAnimalController(UserAnimalService userAnimalService) {
         this.userAnimalService = userAnimalService;
     }
 
     /**
+     * Endpoint to retrieve all liked animals for a specific user.
      *
-     * @param userId
-     * @return
+     * @param userId The ID of the user.
+     * @return ResponseEntity containing a list of all liked animals by user, and a success message.
      */
     @GetMapping(path = "/user/{userId}/likes")
     public ResponseEntity<?> getLikedAnimalsByUser(@PathVariable Long userId) {
@@ -41,9 +39,10 @@ public class UserAnimalController {
     }
 
     /**
+     * Endpoint to add an animal to a user's liked list.
      *
-     * @param animalId
-     * @return
+     * @param animalId The ID of the animal to like.
+     * @return ResponseEntity containing the user-animal relationship, and a success message.
      */
     @PostMapping(path = "/like/{animalId}")
     public ResponseEntity<?> addAnimalToUserLikeList(@PathVariable Long animalId) {
@@ -57,9 +56,10 @@ public class UserAnimalController {
 
 
     /**
+     * Endpoint to remove an animal from a user's liked list.
      *
-     * @param animalId
-     * @return
+     * @param animalId The ID of the animal to remove from the liked list.
+     * @return ResponseEntity containing the removed user-animal relationship, and a success message.
      */
     @DeleteMapping(path = "/like/{animalId}")
     public ResponseEntity<?> deleteAnimeFromUserLikelist(@PathVariable Long animalId) {
