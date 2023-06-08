@@ -10,21 +10,12 @@ import com.api.adoptme.security.JWTUtils;
 import com.api.adoptme.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Service
 public class UserService {
 
@@ -32,11 +23,9 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private JWTUtils jwtUtils;
+    private final JWTUtils jwtUtils;
 
     private MyUserDetails myUserDetails;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder,
@@ -49,9 +38,11 @@ public class UserService {
     }
 
     /**
+     * Creates a new User in the UserRepository.
      *
-     * @param userObject
-     * @return
+     * @param userObject the User object to create in the UserRepository.
+     * @return the created User object.
+     * @throws InformationExistException if a User with the same email as the User object already exists.
      */
     public User createUser(User userObject) {
         Optional<User> user = userRepository.findUserByEmail(userObject.getEmail());
@@ -63,9 +54,11 @@ public class UserService {
     }
 
     /**
+     * Finds a specific User in the UserRepository by their email.
      *
-     * @param email
-     * @return
+     * @param email the email of the User to find.
+     * @return the User object with the specified email.
+     * @throws InformationNotFoundException if the User with the specified email is not found.
      */
     public User findUserByEmail(String email) {
         Optional<User> user = userRepository.findUserByEmail(email);
@@ -76,9 +69,11 @@ public class UserService {
     }
 
     /**
+     * Logs in a User by authenticating their email and password.
      *
-     * @param loginRequest
-     * @return
+     * @param loginRequest the LoginRequest object containing the User's email and password.
+     * @return a LoginResponse object containing the JWT token and the User's id.
+     * @throws RuntimeException if the email or password is incorrect.
      */
     public LoginResponse loginUser(LoginRequest loginRequest) {
         try {
@@ -95,7 +90,13 @@ public class UserService {
     }
 
 
-
+    /**
+     * Retrieves a specific User from the UserRepository by their id.
+     *
+     * @param userId the unique identifier of the User to retrieve.
+     * @return the User object with the specified id.
+     * @throws InformationNotFoundException if the User with the specified id is not found.
+     */
     public User getUserById(Long userId) {
         Optional<User> user = userRepository.findUserById(userId);
         if (user.isPresent()) {
