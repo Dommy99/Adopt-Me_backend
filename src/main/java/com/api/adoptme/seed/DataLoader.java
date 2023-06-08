@@ -117,9 +117,9 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadAdoptionData() {
         if (adoptionRepository.count() == 0) {
-            Adoption adoption1 = new Adoption("Austin", "211-111-1111","email1@email.com", "Adoption1");
-            Adoption adoption2 = new Adoption("Dallas", "311-111-1111","email2@email.com", "Adoption2");
-            Adoption adoption3 = new Adoption("Huston", "411-111-1111","email3@email.com", "Adoption3");
+            Adoption adoption1 = new Adoption("Austin", "211-111-1111","email1@email.com", "Austin Animal Center", "https://www.austintexas.gov/austin-animal-center");
+            Adoption adoption2 = new Adoption("Dallas", "311-111-1111","email2@email.com", "Dallas90","https://bedallas90.org/");
+            Adoption adoption3 = new Adoption("Houston", "411-111-1111","email3@email.com", "Houston Humane Society","https://www.houstonhumane.org/");
             adoptionRepository.save(adoption1);
             adoptionRepository.save(adoption2);
             adoptionRepository.save(adoption3);
