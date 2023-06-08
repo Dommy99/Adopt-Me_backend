@@ -105,10 +105,20 @@ public class DataLoader implements CommandLineRunner {
             Animal animal1 = new Animal("Tim","male","brown","2","boxer","dog","https://images.unsplash.com/photo-1592754862816-1a21a4ea2281?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGV0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60", adoption1);
             Animal animal2 = new Animal("Timmy","male","black","3","pitbull","dog","https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGV0c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60", adoption2);
             Animal animal3 = new Animal("Tims","female","orange","4","siamese","cat","https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBldHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60", adoption3);
+            Animal animal4 = new Animal("Tom","male","brown","2","boxer","dog","https://images.unsplash.com/photo-1625316708582-7c38734be31d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHBldHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60v", adoption1);
+            Animal animal5 = new Animal("Tammy","male","black","3","pitbull","dog","https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHBldHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60", adoption2);
+            Animal animal6 = new Animal("Tams","male","black","1","siamese","cat","https://images.unsplash.com/photo-1574231164645-d6f0e8553590?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNhdHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60", adoption3);
+            Animal animal7 = new Animal("Tony","male","brown","1","fat-tail","lizard","https://images.unsplash.com/photo-1576223205620-0e3aeaa1a84c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bGl6YXJkfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60", adoption1);
+            Animal animal8 = new Animal("Toni","female","black","4","ringed","ferret","https://images.unsplash.com/photo-1576518985149-4f63dfabf9d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmVycmV0fGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60", adoption3);
 
             animalRepository.save(animal1);
             animalRepository.save(animal2);
             animalRepository.save(animal3);
+            animalRepository.save(animal4);
+            animalRepository.save(animal5);
+            animalRepository.save(animal6);
+            animalRepository.save(animal7);
+            animalRepository.save(animal8);
         }
     }
 
