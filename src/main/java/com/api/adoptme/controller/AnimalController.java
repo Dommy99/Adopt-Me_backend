@@ -20,8 +20,17 @@ public class AnimalController {
     static HashMap<String, Object>message;
 
     @Autowired
-    private AnimalService animalService;
+    private final AnimalService animalService;
 
+    public AnimalController(AnimalService animalService) {
+        this.animalService = animalService;
+    }
+
+    /**
+     * Endpoint to retrieve all animals.
+     *
+     * @return ResponseEntity containing a list of all animals, and a success message.
+     */
     @GetMapping(path = "/animal/")
     public ResponseEntity<?> getAllAnimals(){
         message = new HashMap<>();
