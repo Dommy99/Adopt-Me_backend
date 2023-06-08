@@ -26,27 +26,21 @@ public class Adoption {
     @Column
     private String name;
 
+    @Column
+    private String website;
+
     @JsonBackReference
     @OneToMany(mappedBy = "adoption")
     private List<Animal> animals;
     public Adoption() {
     }
 
-
-//    public Adoption(Long id, String location, String number, String email, String name, List<Animal> animals) {
-//        this.id = id;
-//        this.location = location;
-//        this.number = number;
-//        this.email = email;
-//        this.name = name;
-//        this.animals = animals;
-//    }
-
-    public Adoption( String location, String number, String email, String name) {
+    public Adoption(String location, String number, String email, String name, String website) {
         this.location = location;
         this.number = number;
         this.email = email;
         this.name = name;
+        this.website = website;
     }
 
     public Long getId() {
@@ -89,6 +83,14 @@ public class Adoption {
         this.name = name;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
     public List<Animal> getAnimals() {
         return animals;
     }
@@ -105,7 +107,27 @@ public class Adoption {
                 ", number='" + number + '\'' +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
+                ", website='" + website + '\'' +
                 ", animals=" + animals +
                 '}';
     }
+
+
+//    public Adoption(Long id, String location, String number, String email, String name, List<Animal> animals) {
+//        this.id = id;
+//        this.location = location;
+//        this.number = number;
+//        this.email = email;
+//        this.name = name;
+//        this.animals = animals;
+//    }
+
+//    public Adoption( String location, String number, String email, String name) {
+//        this.location = location;
+//        this.number = number;
+//        this.email = email;
+//        this.name = name;
+//    }
+
+
 }
