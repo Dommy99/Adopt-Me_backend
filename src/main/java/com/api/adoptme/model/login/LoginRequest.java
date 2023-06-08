@@ -2,9 +2,9 @@ package com.api.adoptme.model.login;
 
 public class LoginRequest {
 
-    private String email;
+    private final String email;
 
-    private String password;
+    private final String password;
 
     public LoginRequest(String email, String password) {
         this.email = email;
