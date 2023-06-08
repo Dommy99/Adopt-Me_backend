@@ -2,7 +2,6 @@ package com.api.adoptme.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -29,13 +28,6 @@ public class User {
 
     public User() {
     }
-
-//    public User(Long id, String email, String password, List<UserAnimal> userAnimals) {
-//        this.id = id;
-//        this.email = email;
-//        this.password = password;
-//        this.userAnimals = userAnimals;
-//    }
 public User( String email, String password) {
     this.email = email;
     this.password = password;
