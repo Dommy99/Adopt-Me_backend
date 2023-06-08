@@ -1,7 +1,5 @@
 package com.api.adoptme.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -25,12 +23,6 @@ public class UserAnimal {
 
     public UserAnimal() {
     }
-
-//    public UserAnimal(Long id, User user, Animal animal) {
-//        this.id = id;
-//        this.user = user;
-//        this.animal = animal;
-//    }
 
     public UserAnimal( User user, Animal animal) {
         this.user = user;
