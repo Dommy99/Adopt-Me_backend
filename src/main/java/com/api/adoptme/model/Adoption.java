@@ -1,7 +1,6 @@
 package com.api.adoptme.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -111,23 +110,5 @@ public class Adoption {
                 ", animals=" + animals +
                 '}';
     }
-
-
-//    public Adoption(Long id, String location, String number, String email, String name, List<Animal> animals) {
-//        this.id = id;
-//        this.location = location;
-//        this.number = number;
-//        this.email = email;
-//        this.name = name;
-//        this.animals = animals;
-//    }
-
-//    public Adoption( String location, String number, String email, String name) {
-//        this.location = location;
-//        this.number = number;
-//        this.email = email;
-//        this.name = name;
-//    }
-
 
 }
