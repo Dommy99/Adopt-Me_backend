@@ -59,13 +59,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeRequests().antMatchers(
-                        "/auth/users/register/", "/auth/users/login/","/api/animal/"
+                        "/auth/users/register/", "/auth/users/login/","/api/animal/", "/api/like/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
-        http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class); // added for JWT login
+        http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     /**
@@ -96,19 +96,31 @@ public class SecurityConfiguration {
      *
      * @return MyAuthorDetails instance.
      */
+//    @Bean
+//    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+//    public MyUserDetails myAuthorDetails() {
+//        return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
+//                .getPrincipal();
+//    }
+
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public MyUserDetails myAuthorDetails() {
-        return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+    public MyUserDetails myUserDetails() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof MyUserDetails) {
+            return (MyUserDetails) principal;
+        }
+        throw new RuntimeException("Principal is not a MyUserDetails");
     }
+
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH","OPTIONS")
                         .allowedHeaders("*")
                         .allowedOrigins("*");
             }
