@@ -27,9 +27,10 @@ public class UserController {
 
 
     /**
+     * Endpoint to register a new user.
      *
-     * @param userObj
-     * @return
+     * @param userObj The User object to register.
+     * @return ResponseEntity containing the created User and a success message.
      */
     @PostMapping(path = "/users/register/")
     // http://localhost:{portNumber}/auth/users/register/
@@ -47,9 +48,10 @@ public class UserController {
     }
 
     /**
+     * Endpoint to authenticate a user.
      *
-     * @param loginRequest
-     * @return
+     * @param loginRequest The LoginRequest object containing user credentials.
+     * @return ResponseEntity containing the LoginResponse and a success message.
      */
     @PostMapping(path = "/users/login/")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
