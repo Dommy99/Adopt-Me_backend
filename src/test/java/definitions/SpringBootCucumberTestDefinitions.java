@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.*;
 
 
 import java.util.List;
@@ -28,17 +27,9 @@ public class SpringBootCucumberTestDefinitions {
 
     private static final String BASE_URL = "http://localhost:";
 
-    private static RequestSpecification request = RestAssured.given();
+    private static final RequestSpecification request = RestAssured.given();
 
     private static Response response;
-
-    private static ResponseEntity<String> responseEntity;
-
-    private static List<?> list;
-
-    private Long animalId;
-
-    private Long userId;
     @LocalServerPort
     String port;
     public String getSecurityKey() throws Exception {
