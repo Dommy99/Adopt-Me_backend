@@ -52,18 +52,20 @@ public class UserController {
      * @return
      */
     @PostMapping(path = "/users/login/")
-    // http://localhost:{portNumber}/auth/users/login/
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         response = new HashMap<>();
         try {
             LoginResponse loginResponse = userService.loginUser(loginRequest);
             response.put("message", "user logged in");
             response.put("data",loginResponse.getMessage());
+            response.put("userId", loginResponse.getUserId());
             return new ResponseEntity<>(response,HttpStatus.OK);
         }catch (RuntimeException e){
             response.put("message",e.getMessage());
             return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
         }
     }
+
+
 
 }
