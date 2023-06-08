@@ -23,9 +23,13 @@ public class AnimalService {
     }
 
     public static User getCurrentLoggedInUser() {
-        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userDetails.getUser();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof MyUserDetails userDetails) {
+            return userDetails.getUser();
+        }
+        throw new IllegalArgumentException("User is not authenticated");
     }
+
 
     /**
      *
