@@ -6,6 +6,9 @@ import com.api.adoptme.model.Animal;
 import com.api.adoptme.model.User;
 import com.api.adoptme.model.UserAnimal;
 import com.api.adoptme.repository.UserAnimalRepository;
+import com.api.adoptme.security.MyUserDetails;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,16 +49,24 @@ public class UserAnimalService {
      */
     public UserAnimal addAnimalToUserLikeList(Long animalId) {
         Animal animal = animalService.getAnimalById(animalId);
-        UserAnimal userAnimal = userAnimalRepository.findByUserAndAnimal(AnimalService.getCurrentLoggedInUser(), animal);
+        // get currently logged in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!(principal instanceof MyUserDetails)) {
+            throw new AuthenticationCredentialsNotFoundException("Could not find the current user");
+        }
+        User user = ((MyUserDetails)principal).getUser();
+
+        UserAnimal userAnimal = userAnimalRepository.findByUserAndAnimal(user, animal);
         if (userAnimal != null) {
             throw new InformationExistException("You have animal with id " + animalId + " in your watchlist.");
         }
         userAnimal = new UserAnimal();
-        userAnimal.setUser(AnimalService.getCurrentLoggedInUser());
+        userAnimal.setUser(user);
         userAnimal.setAnimal(animal);
-         userAnimalRepository.save(userAnimal);
+        userAnimalRepository.save(userAnimal);
         return userAnimal;
     }
+
 
     /**
      *
