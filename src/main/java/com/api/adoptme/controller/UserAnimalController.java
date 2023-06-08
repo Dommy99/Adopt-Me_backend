@@ -1,14 +1,18 @@
 package com.api.adoptme.controller;
 
 import com.api.adoptme.model.Animal;
+import com.api.adoptme.model.User;
 import com.api.adoptme.model.UserAnimal;
+import com.api.adoptme.security.MyUserDetails;
 import com.api.adoptme.service.UserAnimalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -43,13 +47,14 @@ public class UserAnimalController {
      */
     @PostMapping(path = "/like/{animalId}")
     public ResponseEntity<?> addAnimalToUserLikeList(@PathVariable Long animalId) {
-
-        message = new HashMap<>();
+        Map<String, Object> message = new HashMap<>();
         UserAnimal userAnimal = userAnimalService.addAnimalToUserLikeList(animalId);
         message.put("data", userAnimal);
         message.put("message", "success");
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
+
+
 
     /**
      *
