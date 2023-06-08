@@ -32,17 +32,20 @@ public class AnimalService {
 
 
     /**
+     * Fetches all Animals from the AnimalRepository.
      *
-     * @return
+     * @return a List of all Animal objects present in the AnimalRepository.
      */
     public List<Animal> getAllAnimals() {
         return animalRepository.findAll();
     };
 
     /**
+     * Retrieves a specific Animal from the AnimalRepository by its id.
      *
-     * @param animalId
-     * @return
+     * @param animalId the unique identifier of the Animal object to retrieve.
+     * @return the Animal object with the specified id.
+     * @throws InformationNotFoundException if the Animal object with the specified id is not found.
      */
     public Animal getAnimalById(Long animalId) {
         Optional<Animal> animal = animalRepository.findById(animalId);
