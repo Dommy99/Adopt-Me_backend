@@ -87,11 +87,14 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             myUserDetails = (MyUserDetails) authentication.getPrincipal();
             final String jwtToken = jwtUtils.generateJwtToken(myUserDetails);
-            return new LoginResponse(jwtToken);
+            Long userId = myUserDetails.getUser().getId();
+            return new LoginResponse(jwtToken, userId);
         } catch (Exception e) {
             throw new RuntimeException("Email or Password is incorrect.");
         }
     }
+
+
 
     public User getUserById(Long userId) {
         Optional<User> user = userRepository.findUserById(userId);
