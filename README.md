@@ -21,6 +21,7 @@
 - [Installation](#installation)
 - [Dependencies Used](#dependencies-used)
 - [Documentation Used](#documentation-used)
+- [Credit](#Credit)
 
 ## Description
 
@@ -121,3 +122,6 @@ git clone <https://github.com/{GitHub UserName}/Adopt-Me_backend>
 - [Stackoverflow](https://stackoverflow.com/)
 - [Cucumber](https://cucumber.io/docs/installation/java/#maven)
 - [Java Spring Boot Lecture](https://git.generalassemb.ly/sureshmelvinsigera/Java-Spring-Boot-lecture/blob/main/README.md)
+
+## Credit
+- Shout out to [Leonardo Rodriguez](https://github.com/LRodriguez92), [Kevin Barrios](https://github.com/dayjyun), [Jay Padilla](https://github.com/Jaypad07) for help with bug fixes and code reviews.
